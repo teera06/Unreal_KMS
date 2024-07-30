@@ -13,5 +13,9 @@ UCLASS()
 class UNREAL_PROJECT_API AGlobalHUD : public AHUD
 {
 	GENERATED_BODY()
-	
+public:
+#if WITH_EDITOR
+	UFUNCTION(BlueprintCallable)
+	void AddDebugString(FString _Text);
+#endif
 };

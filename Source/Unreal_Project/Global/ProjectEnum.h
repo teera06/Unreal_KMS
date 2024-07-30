@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -14,8 +14,8 @@
 UENUM(BlueprintType)
 enum class EPlayerUpperAnimation : uint8
 {
-	Idle UMETA(DisplayName = "°¡¸¸È÷ÀÖ±â"),
-	Attack UMETA(DisplayName = "°ø°İ"),
+	Idle UMETA(DisplayName = "ê°€ë§Œíˆìˆê¸°"),
+	Attack UMETA(DisplayName = "ê³µê²©"),
 };
 
 
@@ -25,19 +25,19 @@ UENUM(BlueprintType)
 enum class EWeapon : uint8
 {
 	
-	GreatSword UMETA(DisplayName = "´ë°Ë"),
-	OneHandSword UMETA(DisplayName = "ÇÑ¼Õ°Ë"),
-	shield UMETA(DisplayName = "¹æÆĞ")
+	GreatSword UMETA(DisplayName = "ëŒ€ê²€"),
+	OneHandSword UMETA(DisplayName = "í•œì†ê²€"),
+	shield UMETA(DisplayName = "ë°©íŒ¨")
 };
 
 
 UENUM(BlueprintType)
 enum class EItemType : uint8
 {
-	None UMETA(DisplayName = "¿¡·¯"),
-	Weapon UMETA(DisplayName = "¹«±â"),
-	Armor UMETA(DisplayName = "¹æ¾î±¸"),
-	Potion UMETA(DisplayName = "¹°¾à"),
+	None UMETA(DisplayName = "ì—ëŸ¬"),
+	Weapon UMETA(DisplayName = "ë¬´ê¸°"),
+	Armor UMETA(DisplayName = "ë°©ì–´êµ¬"),
+	Potion UMETA(DisplayName = "ë¬¼ì•½"),
 };
 
 
@@ -60,19 +60,19 @@ enum class EObjectType : uint8
 UENUM(BlueprintType)
 enum class EMonsterState : uint8
 {
-	Idle UMETA(DisplayName = "¼­ÀÖ±â"),
-	Patrol UMETA(DisplayName = "¼­¼ºÀÌ±â"),
-	MoveToPlayer UMETA(DisplayName = "ÇÃ·¹ÀÌ¾î ÂÑ±â"),
-	MoveToLocation UMETA(DisplayName = "Á¤ÇØÁø À§Ä¡·Î ÀÌµ¿ÇÏ±â"),
-	Attack UMETA(DisplayName = "°ø°İ"),
+	Idle UMETA(DisplayName = "ì„œìˆê¸°"),
+	Patrol UMETA(DisplayName = "ì„œì„±ì´ê¸°"),
+	MoveToPlayer UMETA(DisplayName = "í”Œë ˆì´ì–´ ì«“ê¸°"),
+	MoveToLocation UMETA(DisplayName = "ì •í•´ì§„ ìœ„ì¹˜ë¡œ ì´ë™í•˜ê¸°"),
+	Attack UMETA(DisplayName = "ê³µê²©"),
 };
 
 UENUM(BlueprintType)
 enum class EMonsterAnimation : uint8
 {
-	Idle UMETA(DisplayName = "¼­ÀÖ±â"),
-	Run UMETA(DisplayName = "´Ş¸®±â"),
-	Attack0 UMETA(DisplayName = "ÆòÅ¸0"),
-	Attack1 UMETA(DisplayName = "ÆòÅ¸1"),
-	Attack2 UMETA(DisplayName = "ÆòÅ¸2"),
+	Idle UMETA(DisplayName = "ì„œìˆê¸°"),
+	Run UMETA(DisplayName = "ë‹¬ë¦¬ê¸°"),
+	Attack0 UMETA(DisplayName = "í‰íƒ€0"),
+	Attack1 UMETA(DisplayName = "í‰íƒ€1"),
+	Attack2 UMETA(DisplayName = "í‰íƒ€2"),
 };

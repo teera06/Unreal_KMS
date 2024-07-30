@@ -3,6 +3,7 @@
 
 #include "Global/GlobalBlueprintFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Global/GlobalHUD.h"
 
 #if WITH_EDITOR
 void UGlobalBlueprintFunctionLibrary::DebugTextPrint(UWorld* _World, FString Text)
@@ -10,14 +11,14 @@ void UGlobalBlueprintFunctionLibrary::DebugTextPrint(UWorld* _World, FString Tex
 
 	APlayerController* Con = UGameplayStatics::GetPlayerController(_World, 0);
 	// UI가 입력과 관련이 많기 때문에 HUD를 찾아내려면 
-	//AGlobalHUD* Global = Cast<AGlobalHUD>(Con->GetHUD());
+	AGlobalHUD* Global = Cast<AGlobalHUD>(Con->GetHUD());
 
-	/*if (nullptr == Global)
+	if (nullptr == Global)
 	{
 		return;
-	}*/
+	}
 
-	/*Global->AddDebugString(Text);*/
+	Global->AddDebugString(Text);
 }
 
 #endif
