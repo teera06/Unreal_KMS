@@ -6,6 +6,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GlobalBlueprintFunctionLibrary.generated.h"
 
+class AGlobalHUD;
+class UGlobalGameInstance;
 /**
  * 
  */
@@ -19,11 +21,11 @@ public:
 	static void DebugTextPrint(UWorld* _World, FString Text);
 #endif
 
-	/*UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject", UnsafeDuringActorConstruction = "true"))
-	static ATPSPlayHUD* GetTPSPlayHUD(const UObject* WorldContextObject);*/
+	UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject", UnsafeDuringActorConstruction = "true"))
+	static AGlobalHUD* GetGlobalHUD(const UObject* WorldContextObject);
 
-	/*UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject"))
-	static UGIMATGameInstance* GetGIMATGameInstance(const UWorld* WorldContextObject);*/
+	UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject"))
+	static UGlobalGameInstance* GetGlobalGameInstance(const UWorld* WorldContextObject);
 
 	/*static AGlobalGameState* GetGlobalGameState(const UObject* WorldContextObject);*/
 
