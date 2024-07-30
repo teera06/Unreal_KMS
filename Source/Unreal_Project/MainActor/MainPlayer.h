@@ -13,5 +13,11 @@ UCLASS()
 class UNREAL_PROJECT_API AMainPlayer : public AGlobalCharacter
 {
 	GENERATED_BODY()
-	
+protected:
+	// Called when the game starts or when spawned
+	void BeginPlay() override;
+
+	void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
 };

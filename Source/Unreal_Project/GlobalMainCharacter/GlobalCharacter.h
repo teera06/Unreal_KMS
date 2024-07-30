@@ -33,7 +33,12 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UGlobalAnimInstance* GetGlobalAnimInstance();
+
+	UPROPERTY(Category = "Contents", VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TArray<UStaticMeshComponent*> StaticItemMeshs;
+
 private:
+
 
 	UPROPERTY(Category = "Contents", VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UGlobalAnimInstance* AnimInst = nullptr;

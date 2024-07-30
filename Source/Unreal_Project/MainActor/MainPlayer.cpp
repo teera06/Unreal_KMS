@@ -3,3 +3,12 @@
 
 #include "MainActor/MainPlayer.h"
 
+void AMainPlayer::BeginPlay()
+{
+
+}
+
+void AMainPlayer::Tick(float DeltaTime)
+{
+
+}

@@ -76,3 +76,11 @@ enum class EMonsterAnimation : uint8
 	Attack1 UMETA(DisplayName = "평타1"),
 	Attack2 UMETA(DisplayName = "평타2"),
 };
+
+UENUM(BlueprintType)
+enum class EPlyaerStaticItemSlot : uint8
+{
+	RWeapon UMETA(DisplayName = "무기"),
+	LWeapon UMETA(DisplayName = "방패"),
+	SlotMax
+};
