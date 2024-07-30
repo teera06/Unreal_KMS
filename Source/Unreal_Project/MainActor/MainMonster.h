@@ -6,6 +6,10 @@
 #include "GlobalMainCharacter/GlobalCharacter.h"
 #include "MainMonster.generated.h"
 
+class AMainAIController;
+class UMainMonsterData;
+struct FMainMonsterDataRow;
+
 /**
  * 
  */
@@ -18,4 +22,13 @@ protected:
 	void BeginPlay() override;
 
 	void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	AMainAIController* GetMainAIController();
+
+private:
+	UPROPERTY()
+	UMainMonsterData* SettingData=nullptr;
+
+	const FMainMonsterDataRow* BaseData=nullptr;
 };

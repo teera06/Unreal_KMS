@@ -7,6 +7,8 @@
 #include "Global/ProjectEnum.h"
 #include "GlobalCharacter.generated.h"
 
+class UGlobalAnimInstance;
+
 UCLASS()
 class UNREAL_PROJECT_API AGlobalCharacter : public ACharacter
 {
@@ -24,6 +26,8 @@ public:
 
 	void ChangeAnimation(uint8 _Type);
 
+	UGlobalAnimInstance* GetGlobalAnimInstance();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -34,6 +38,10 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+
+	UPROPERTY(Category = "Contents", VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UGlobalAnimInstance* AnimInst = nullptr;
+
 	UPROPERTY(Category = "Contents",  VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	uint8 AniValue = 0;
 };
