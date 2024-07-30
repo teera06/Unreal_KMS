@@ -5,6 +5,7 @@
 #include "Global/ProjectEnum.h"
 #include "Unreal_Project.h"
 #include "GlobalMainCharacter/GlobalCharacter.h"
+#include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
 
 
 EBTNodeResult::Type UBTTaskNode_Idle::ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* _NodeMemory)
@@ -42,5 +43,33 @@ EBTNodeResult::Type UBTTaskNode_Idle::ExecuteTask(UBehaviorTreeComponent& _Owner
 
 void UBTTaskNode_Idle::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNodeMemory, float _DeltaSeconds)
 {
+	Super::TickTask(_OwnerComp, _pNodeMemory, _DeltaSeconds);
 
+	//UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+
+	/*AGlobalGameState* GameState = UGlobalBlueprintFunctionLibrary::GetGlobalGameState(GetWorld());
+	TArray<AActor*> Players = GameState->GetGroup(ETPSObjectType::Player);*/
+
+	//if (true == Players.IsEmpty())
+	//{
+	//	// StateChange
+	//	FinishLatentTask(_OwnerComp, EBTNodeResult::Aborted);
+	//	return;
+	//}
+
+	/*AActor* TargetActor = CheckTarget(_OwnerComp, MonsterData->Data->SightRange, ETPSObjectType::Player);*/
+
+	/*if (nullptr == TargetActor)
+	{
+		MonsterData->IdleTime += _DeltaSeconds;
+
+		if (true == MonsterData->IsPatrol())
+		{
+			ChangeState(_OwnerComp, ETPSMonsterState::Patrol);
+		}
+		return;
+	}
+
+	ChangeState(_OwnerComp, ETPSMonsterState::MoveToPlayer);*/
+	//return;
 }

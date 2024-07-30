@@ -2,7 +2,6 @@
 
 
 #include "GlobalMainCharacter/GlobalCharacter.h"
-#include "Global/GlobalAnimInstance.h"
 // Sets default values
 
 AGlobalCharacter::AGlobalCharacter()

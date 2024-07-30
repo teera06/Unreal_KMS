@@ -31,4 +31,5 @@ private:
 	UMainMonsterData* SettingData=nullptr;
 
 	const FMainMonsterDataRow* BaseData=nullptr;
+
 };

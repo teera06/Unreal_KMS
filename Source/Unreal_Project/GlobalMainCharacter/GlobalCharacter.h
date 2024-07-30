@@ -5,9 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Global/ProjectEnum.h"
+#include "Global/GlobalAnimInstance.h"
 #include "GlobalCharacter.generated.h"
-
-class UGlobalAnimInstance;
 
 UCLASS()
 class UNREAL_PROJECT_API AGlobalCharacter : public ACharacter
@@ -26,7 +25,6 @@ public:
 
 	void ChangeAnimation(uint8 _Type);
 
-	UGlobalAnimInstance* GetGlobalAnimInstance();
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,6 +35,7 @@ protected:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UGlobalAnimInstance* GetGlobalAnimInstance();
 private:
 
 	UPROPERTY(Category = "Contents", VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
