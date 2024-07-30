@@ -4,4 +4,5 @@
 #include "Modules/ModuleManager.h"
 
 IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Unreal_Project, "Unreal_Project" );
- 
+
+DEFINE_LOG_CATEGORY(MyLog);
