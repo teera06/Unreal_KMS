@@ -14,4 +14,8 @@ class UNREAL_PROJECT_API AMainMonster : public AGlobalCharacter
 {
 	GENERATED_BODY()
 	
+protected:
+	void BeginPlay() override;
+
+	void Tick(float DeltaTime) override;
 };
