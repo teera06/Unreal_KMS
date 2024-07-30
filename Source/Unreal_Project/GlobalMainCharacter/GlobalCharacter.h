@@ -20,17 +20,26 @@ public:
 	template<typename EnumType>
 	void ChangeAnimation(EnumType _Type)
 	{
+		if (AnimInst == nullptr)
+		{
+			return;
+		}
+
 		AnimInst->ChangeAnimation(static_cast<uint8>(_Type));
 	}
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	void BeginPlay() override;
 
-	virtual void Tick(float DeltaTime) override;
+	void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeSlotMesh(EStaticItemSlot _Slot, UStaticMesh* _Mesh);
+
 
 	UGlobalAnimInstance* GetGlobalAnimInstance();
 

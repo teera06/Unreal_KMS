@@ -2,6 +2,9 @@
 
 
 #include "GlobalMainCharacter/GlobalCharacter.h"
+#include "Unreal_Project.h"
+#include "Global/GlobalGameInstance.h"
+#include "Global/GlobalBlueprintFunctionLibrary.h"
 // Sets default values
 
 AGlobalCharacter::AGlobalCharacter()
@@ -9,6 +12,18 @@ AGlobalCharacter::AGlobalCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	UEnum* Enum = StaticEnum<EStaticItemSlot>();
+
+	for (size_t i = 0; i < static_cast<size_t>(EStaticItemSlot::SlotMax); i++)
+	{
+		FString Name = Enum->GetNameStringByValue(i);
+		UStaticMeshComponent* NewSlotMesh = CreateDefaultSubobject<UStaticMeshComponent>(*Name);
+		NewSlotMesh->SetupAttachment(GetMesh(), *Name);
+		NewSlotMesh->SetCollisionProfileName(TEXT("NoCollision"));
+		NewSlotMesh->SetGenerateOverlapEvents(true);
+		NewSlotMesh->bHiddenInSceneCapture = true;
+		StaticItemMeshs.Push(NewSlotMesh);
+	}
 }
 
 
@@ -42,3 +57,18 @@ void AGlobalCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 }
 
+void AGlobalCharacter::ChangeSlotMesh(EStaticItemSlot _Slot, UStaticMesh* _Mesh)
+{
+	uint8 SlotIndex = static_cast<uint8>(_Slot);
+	if (StaticItemMeshs.Num() <= SlotIndex)
+	{
+		UE_LOG(MyLog, Fatal, TEXT("%S(%u)> if (ItemMeshs.Num() <= static_cast<uint8>(_Slot))"), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	UGlobalGameInstance* Inst = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
+
+	//UStaticMesh* FindMesh = Inst->GetStaticMesh(_MeshName);
+
+	StaticItemMeshs[SlotIndex]->SetStaticMesh(_Mesh);
+}

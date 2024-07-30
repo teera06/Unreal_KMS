@@ -78,7 +78,7 @@ enum class EMonsterAnimation : uint8
 };
 
 UENUM(BlueprintType)
-enum class EPlyaerStaticItemSlot : uint8
+enum class EStaticItemSlot : uint8
 {
 	RWeapon UMETA(DisplayName = "무기"),
 	LWeapon UMETA(DisplayName = "방패"),
