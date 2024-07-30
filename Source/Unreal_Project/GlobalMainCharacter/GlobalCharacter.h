@@ -20,11 +20,8 @@ public:
 	template<typename EnumType>
 	void ChangeAnimation(EnumType _Type)
 	{
-		ChangeAnimation(static_cast<uint8>(_Type));
+		AnimInst->ChangeAnimation(static_cast<uint8>(_Type));
 	}
-
-	void ChangeAnimation(uint8 _Type);
-
 
 protected:
 	// Called when the game starts or when spawned

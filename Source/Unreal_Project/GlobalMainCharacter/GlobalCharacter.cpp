@@ -11,10 +11,7 @@ AGlobalCharacter::AGlobalCharacter()
 
 }
 
-void AGlobalCharacter::ChangeAnimation(uint8 _Type)
-{
-	AniValue = _Type;
-}
+
 
 UGlobalAnimInstance* AGlobalCharacter::GetGlobalAnimInstance()
 {
@@ -32,7 +29,10 @@ void AGlobalCharacter::BeginPlay()
 void AGlobalCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	/*if (nullptr != AnimInst)
+	{
+		AnimInst->ChangeAnimation(AniValue);
+	}*/
 }
 
 // Called to bind functionality to input
