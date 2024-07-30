@@ -11,6 +11,11 @@ AGlobalCharacter::AGlobalCharacter()
 
 }
 
+void AGlobalCharacter::ChangeAnimation(uint8 _Type)
+{
+	AniValue = _Type;
+}
+
 // Called when the game starts or when spawned
 void AGlobalCharacter::BeginPlay()
 {

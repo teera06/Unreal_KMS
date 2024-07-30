@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Global/ProjectEnum.h"
 #include "GlobalCharacter.generated.h"
 
 UCLASS()
@@ -21,15 +22,18 @@ public:
 		ChangeAnimation(static_cast<uint8>(_Type));
 	}
 
+	void ChangeAnimation(uint8 _Type);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+private:
+	UPROPERTY(Category = "Contents",  VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	uint8 AniValue = 0;
 };
