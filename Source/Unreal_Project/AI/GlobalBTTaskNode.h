@@ -17,6 +17,24 @@ class UNREAL_PROJECT_API UGlobalBTTaskNode : public UBTTaskNode
 public:
 	UGlobalBTTaskNode();
 protected:
+
+	template<typename OwnerType>
+	OwnerType* GetController(UBehaviorTreeComponent& _OwnerComp)
+	{
+		return Cast<OwnerType>(GetController(_OwnerComp));
+	}
+
+	AController* GetController(UBehaviorTreeComponent& _OwnerComp);
+
+	template<typename OwnerType>
+	OwnerType* GetActor(UBehaviorTreeComponent& _OwnerComp)
+	{
+		return Cast<OwnerType>(GetActor(_OwnerComp));
+	}
+
+	AActor* GetActor(UBehaviorTreeComponent& _OwnerComp);
+
+
 	template<typename EnumType>
 	EnumType GetCurState(UBehaviorTreeComponent& _OwnerComp)
 	{
@@ -33,13 +51,6 @@ protected:
 
 	void ChangeState(UBehaviorTreeComponent& _OwnerComp, uint8 _StateChange);
 
-	template<typename OwnerType>
-	OwnerType* GetActor(UBehaviorTreeComponent& _OwnerComp)
-	{
-		return Cast<OwnerType>(GetActor(_OwnerComp));
-	}
-
-	AActor* GetActor(UBehaviorTreeComponent& _OwnerComp);
 
 	template<typename ConvertType>
 	ConvertType* GetValueAsObject(UBehaviorTreeComponent& _OwnerComp, FName _Name)
