@@ -43,8 +43,8 @@ void AMainMonster::BeginPlay()
 		SettingData->OriginPos = GetActorLocation();
 		SettingData->OriginPos.Z = 0.0f;
 
-		/*AMainAIController* Con = GetController<AMainAIController>();
-		Con->GetBlackboardComponent()->SetValueAsObject(TEXT("MonsterData"), SettingData);*/
+		AMainAIController* Con = GetController<AMainAIController>();
+		Con->GetBlackboardComponent()->SetValueAsObject(TEXT("MonsterData"), SettingData);
 	}
 }
 

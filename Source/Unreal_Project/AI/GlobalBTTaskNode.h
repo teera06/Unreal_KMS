@@ -40,4 +40,21 @@ protected:
 	}
 
 	AActor* GetActor(UBehaviorTreeComponent& _OwnerComp);
+
+	template<typename ConvertType>
+	ConvertType* GetValueAsObject(UBehaviorTreeComponent& _OwnerComp, FName _Name)
+	{
+		return Cast<ConvertType>(GetValueAsObject(_OwnerComp, _Name));
+	}
+
+	// __
+	FORCEINLINE UObject* GetValueAsObject(UBehaviorTreeComponent& _OwnerComp, FName _Name)
+	{
+		return _OwnerComp.GetBlackboardComponent()->GetValueAsObject(_Name);
+	}
+
+	FORCEINLINE void SetValueAsObject(UBehaviorTreeComponent& _OwnerComp, FName _Name, UObject* _Value)
+	{
+		_OwnerComp.GetBlackboardComponent()->SetValueAsObject(_Name, _Value);
+	}
 };
