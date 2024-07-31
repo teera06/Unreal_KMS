@@ -19,7 +19,7 @@ public:
  * 
  */
 UCLASS()
-class UNREAL_PROJECT_API AGloabalGameState : public AGameState
+class UNREAL_PROJECT_API AGloabalGameState : public AGameStateBase
 {
 	GENERATED_BODY()
 public:

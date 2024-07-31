@@ -17,6 +17,9 @@ void AMainMonster::BeginPlay()
 	UGlobalGameInstance* Inst = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
 	BaseData = Inst->GetMonsterData(FName("BaseMonster"));
 
+	ObjectType = EObjectType::Monster;
+	UGlobalBlueprintFunctionLibrary::PushActor(GetWorld(), ObjectType, this);
+
 	{
 		for (TPair<EMonsterAnimation, class UAnimMontage*> Montage : BaseData->AnimMontages)
 		{

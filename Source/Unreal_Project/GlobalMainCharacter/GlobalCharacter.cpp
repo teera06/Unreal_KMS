@@ -57,6 +57,12 @@ void AGlobalCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 }
 
+void AGlobalCharacter::EndPlay(EEndPlayReason::Type Reason)
+{
+	Super::EndPlay(Reason);
+	UGlobalBlueprintFunctionLibrary::PopActor(GetWorld(), ObjectType, this);
+}
+
 void AGlobalCharacter::ChangeSlotMesh(EStaticItemSlot _Slot, UStaticMesh* _Mesh)
 {
 	uint8 SlotIndex = static_cast<uint8>(_Slot);

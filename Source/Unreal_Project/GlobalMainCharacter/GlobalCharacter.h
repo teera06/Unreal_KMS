@@ -42,6 +42,8 @@ protected:
 	// Called to bind functionality to input
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void EndPlay(EEndPlayReason::Type Reason) override;
+
 	UFUNCTION(BlueprintCallable)
 	void ChangeSlotMesh(EStaticItemSlot _Slot, UStaticMesh* _Mesh);
 
@@ -50,6 +52,9 @@ protected:
 
 	UPROPERTY(Category = "Contents", VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TArray<UStaticMeshComponent*> StaticItemMeshs;
+
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	EObjectType ObjectType = EObjectType::Max;
 
 private:
 
