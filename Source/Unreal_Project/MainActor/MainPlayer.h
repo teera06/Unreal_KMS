@@ -20,4 +20,7 @@ protected:
 	void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
+private:
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	bool IsAttCpp = false;
 };
