@@ -6,6 +6,10 @@
 #include "Unreal_Project.h"
 #include "GlobalMainCharacter/GlobalCharacter.h"
 #include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
+#include "MainActor/MainPlayer.h"
+#include "NavigationSystem.h"
+//#include "NavigationPath.h
+#include "AI/AIController/MainAIController.h"
 
 EBTNodeResult::Type UBTTaskNode_PlayerToMove::ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* _NodeMemory)
 {
@@ -13,7 +17,7 @@ EBTNodeResult::Type UBTTaskNode_PlayerToMove::ExecuteTask(UBehaviorTreeComponent
 
 	EMonsterState StateValue = GetCurState<EMonsterState>(_OwnerComp);
 
-	if (StateValue != EMonsterState::MoveToPlayer)
+	if (StateValue != EMonsterState::PlayerToMove)
 	{
 		return EBTNodeResult::Type::Failed;
 	}
@@ -42,4 +46,86 @@ EBTNodeResult::Type UBTTaskNode_PlayerToMove::ExecuteTask(UBehaviorTreeComponent
 void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNodeMemory, float _DeltaSeconds)
 {
     Super::TickTask(_OwnerComp, _pNodeMemory, _DeltaSeconds);
+
+	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+
+
+	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
+
+	/*if (false == Target->IsValidLowLevel())
+	{
+		ChangeState(_OwnerComp, EMonsterState::Idle);
+		return;
+	}*/
+
+	AMainPlayer* Character = GetActor<AMainPlayer>(_OwnerComp);
+
+
+	AActor* OldTarget = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
+	AActor* TargetActor = GetTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
+
+	/*if (nullptr == TargetActor)
+	{
+		MonsterData->TargetPosToOriginPos();
+		ChangeState(_OwnerComp, EMonsterState::MoveToLocation);
+		return;
+	}*/
+
+	// 무조건 가까운놈 쫓는다로 결정했다.
+	// 참고로 기반이 다 되어있기 때문에 쉽게 짠다는걸 기억해라.
+	if (OldTarget != TargetActor)
+	{
+		SetValueAsObject(_OwnerComp, TEXT("TargetActor"), TargetActor);
+		return;
+	}
+
+	//if (true == MonsterData->IsGround && true == MonsterData->PathPoints.IsEmpty())
+	//{
+	//	FVector Start = Character->GetActorLocation();
+	//	FVector End = TargetActor->GetActorLocation();
+
+	//	UNavigationPath* Path = UNavigationSystemV1::FindPathToLocationSynchronously(GetWorld(), Start, End, Character);
+	//	//MonsterData->PathPoints = Path->PathPoints;
+	//	MonsterData->PathPoints.RemoveAt(0);
+
+
+//#if WITH_EDITOR
+//		Path->EnableDebugDrawing(true);
+//#endif
+	//}
+
+	FVector Start = Character->GetActorLocation();
+	FVector End = TargetActor->GetActorLocation();
+
+	UNavigationPath* Path = UNavigationSystemV1::FindPathToLocationSynchronously(GetWorld(), Start, End, Character);
+	//MonsterData->PathPoints = Path->PathPoints;
+	MonsterData->PathPoints.RemoveAt(0);
+
+	AMainAIController* Con = GetController<AMainAIController>(_OwnerComp);
+
+	FVector TargetLocation = Target->GetActorLocation();
+
+	if (false == MonsterData->PathPoints.IsEmpty())
+	{
+		TargetLocation = MonsterData->PathPoints[0];
+
+		FVector MonsterPos = Character->GetActorLocation();
+		MonsterPos.Z = 0.0f;
+		FVector CheckDir = (TargetLocation - MonsterPos);
+		if (10.0f >= CheckDir.Size())
+		{
+			MonsterData->PathPoints.RemoveAt(0);
+		}
+	}
+
+	FVector MoveDir = TargetLocation - Character->GetActorLocation();
+	Character->AddMovementInput(MoveDir);
+
+	FVector AttackRangeCheck = Target->GetActorLocation() - Character->GetActorLocation();
+	if (AttackRangeCheck.Size() > MonsterData->Data->AttackRange)
+	{
+		return;
+	}
+
+	//ChangeState(_OwnerComp, ETPSMonsterState::Attack);
 }

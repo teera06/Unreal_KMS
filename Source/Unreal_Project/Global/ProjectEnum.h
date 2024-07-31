@@ -62,7 +62,7 @@ enum class EMonsterState : uint8
 {
 	Idle UMETA(DisplayName = "서있기"),
 	Patrol UMETA(DisplayName = "서성이기"),
-	MoveToPlayer UMETA(DisplayName = "플레이어 쫓기"),
+	PlayerToMove UMETA(DisplayName = "플레이어 쫓기"),
 	MoveToLocation UMETA(DisplayName = "정해진 위치로 이동하기"),
 	Attack UMETA(DisplayName = "공격"),
 };

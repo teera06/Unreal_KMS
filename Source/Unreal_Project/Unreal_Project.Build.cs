@@ -9,7 +9,7 @@ public class Unreal_Project : ModuleRules
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicIncludePaths.Add(System.IO.Path.Combine(ModuleDirectory, ""));
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "UMG", "NavigationSystem" });
 
         //PrivateDependencyModuleNames.AddRange(new string[] { });
     }

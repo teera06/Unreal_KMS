@@ -68,4 +68,21 @@ protected:
 	{
 		_OwnerComp.GetBlackboardComponent()->SetValueAsObject(_Name, _Value);
 	}
+
+	template<typename EnumType>
+	AActor* GetTarget(UBehaviorTreeComponent& _OwnerComp, float _Range, EnumType _Target, bool _ZIgnore = true)
+	{
+		return GetTarget(_OwnerComp, _Range, static_cast<uint8>(_Target), _ZIgnore);
+	}
+
+	AActor* GetTarget(UBehaviorTreeComponent& _OwnerComp, float _Range, uint8 Target, bool _ZIgnore = true);
+
+	template<typename EnumType>
+	AActor* CheckTarget(UBehaviorTreeComponent& _OwnerComp, float _Range, EnumType Target, bool _ZIgnore = true)
+	{
+		return CheckTarget(_OwnerComp, _Range, static_cast<uint8>(Target), _ZIgnore);
+	}
+
+	AActor* CheckTarget(UBehaviorTreeComponent& _OwnerComp, float _Range, uint8 Target, bool _ZIgnore = true);
+
 };

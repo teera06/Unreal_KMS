@@ -6,7 +6,8 @@
 #include "Unreal_Project.h"
 #include "GlobalMainCharacter/GlobalCharacter.h"
 #include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
-
+#include "Global/GloabalGameState.h"
+#include "Global/GlobalBlueprintFunctionLibrary.h"
 
 EBTNodeResult::Type UBTTaskNode_Idle::ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* _NodeMemory)
 {
@@ -47,17 +48,17 @@ void UBTTaskNode_Idle::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 
 	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
 
-	/*AGlobalGameState* GameState = UGlobalBlueprintFunctionLibrary::GetGlobalGameState(GetWorld());
-	TArray<AActor*> Players = GameState->GetGroup(ETPSObjectType::Player);*/
+	AGloabalGameState* GameState = UGlobalBlueprintFunctionLibrary::GetGloabalGameState(GetWorld());
+	TArray<AActor*> Players = GameState->GetGroup(EObjectType::Player);
 
-	//if (true == Players.IsEmpty())
-	//{
-	//	// StateChange
-	//	FinishLatentTask(_OwnerComp, EBTNodeResult::Aborted);
-	//	return;
-	//}
+	if (true == Players.IsEmpty())
+	{
+		//StateChange
+		FinishLatentTask(_OwnerComp, EBTNodeResult::Aborted);
+		return;
+	}
 
-	/*AActor* TargetActor = CheckTarget(_OwnerComp, MonsterData->Data->SightRange, ETPSObjectType::Player);*/
+	AActor* TargetActor = CheckTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
 
 	/*if (nullptr == TargetActor)
 	{
@@ -65,11 +66,11 @@ void UBTTaskNode_Idle::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 
 		if (true == MonsterData->IsPatrol())
 		{
-			ChangeState(_OwnerComp, ETPSMonsterState::Patrol);
+			ChangeState(_OwnerComp, EMonsterState::Patrol);
 		}
 		return;
-	}
+	}*/
 
-	ChangeState(_OwnerComp, ETPSMonsterState::MoveToPlayer);*/
-	//return;
+	ChangeState(_OwnerComp, EMonsterState::PlayerToMove);
+	return;
 }
