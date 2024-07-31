@@ -45,7 +45,7 @@ void UBTTaskNode_Idle::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 {
 	Super::TickTask(_OwnerComp, _pNodeMemory, _DeltaSeconds);
 
-	//UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
 
 	/*AGlobalGameState* GameState = UGlobalBlueprintFunctionLibrary::GetGlobalGameState(GetWorld());
 	TArray<AActor*> Players = GameState->GetGroup(ETPSObjectType::Player);*/

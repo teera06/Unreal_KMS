@@ -13,5 +13,8 @@ UCLASS()
 class UNREAL_PROJECT_API UBTTaskNode_PlayerToMove : public UGlobalBTTaskNode
 {
 	GENERATED_BODY()
-	
+protected:
+	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* _NodeMemory) override;
+
+	void TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNodeMemory, float _DeltaSeconds) override;
 };
