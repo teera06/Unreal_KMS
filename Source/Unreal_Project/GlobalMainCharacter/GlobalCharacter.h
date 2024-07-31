@@ -28,6 +28,11 @@ public:
 		AnimInst->ChangeAnimation(static_cast<uint8>(_Type));
 	}
 
+	FORCEINLINE TArray<UStaticMeshComponent*> GetStaticItemMesh() const
+	{
+		return StaticItemMeshs;
+	}
+
 protected:
 	// Called when the game starts or when spawned
 	void BeginPlay() override;
