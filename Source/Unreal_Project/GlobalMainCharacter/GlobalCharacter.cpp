@@ -11,7 +11,7 @@ AGlobalCharacter::AGlobalCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	GetMesh()->SetGenerateOverlapEvents(true);
 	UEnum* Enum = StaticEnum<EStaticItemSlot>();
 
 	for (size_t i = 0; i < static_cast<size_t>(EStaticItemSlot::SlotMax); i++)

@@ -5,6 +5,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "MainActor/MainPlayer.h"
+#include "MainActor/MainMonster.h"
 
 void UOneHandSwordAnimNotifyState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
@@ -49,27 +50,29 @@ void UOneHandSwordAnimNotifyState::NotifyBegin(USkeletalMeshComponent* MeshComp,
 	if (ActorHit)
 	{
 		UGameplayStatics::ApplyDamage(ActorHit, 20.0f, nullptr, PlayCharacter, nullptr);
-		//{
-		//	AC_ZombieBase* Zombie = Cast<AC_ZombieBase>(ActorHit);
+		{
+			AMainMonster* Monster = Cast<AMainMonster>(ActorHit);
 
-		//	if (Zombie)
-		//	{
-		//		//ZombieDieTrace(Zombie);
-		//		PlayCharacter->WeaponSwingSound(Hit, true);
-		//		Zombie->SetHP(25.0f);
-		//		PlayCharacter->CreateZombieBlood(Hit);
+			if (Monster)
+			{
 
-		//		AC_MonsterAIBase* AIController = Cast<AC_MonsterAIBase>(Zombie->GetController());
-		//		if (AIController != nullptr) {
-		//			AIController->SetTargetActor(PlayCharacter);
-		//		}
+				int a = 0;
+				////zombiedietrace(zombie);
+				//playcharacter->weaponswingsound(hit, true);
+				//zombie->sethp(25.0f);
+				//playcharacter->createzombieblood(hit);
 
-		//		PlayCharacter->MakeNoise(10.0f);
+				//ac_monsteraibase* aicontroller = cast<ac_monsteraibase>(zombie->getcontroller());
+				//if (aicontroller != nullptr) {
+				//	aicontroller->settargetactor(playcharacter);
+				//}
+
+				//playcharacter->makenoise(10.0f);
 
 
 
-		//	}
-		//}
+			}
+		}
 
 	}
 }
