@@ -6,6 +6,7 @@
 #include "Global/GlobalHUD.h"
 #include "Global/GlobalGameInstance.h"
 #include "Unreal_Project.h"
+#include "Global/GloabalGameState.h"
 
 #if WITH_EDITOR
 void UGlobalBlueprintFunctionLibrary::DebugTextPrint(UWorld* _World, FString Text)
@@ -45,3 +46,56 @@ UGlobalGameInstance* UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(cons
 
 	return Inst;
 }
+
+AGloabalGameState* UGlobalBlueprintFunctionLibrary::GetGloabalGameState(const UObject* WorldContextObject)
+{
+	if (nullptr == WorldContextObject)
+	{
+		return nullptr;
+	}
+
+	const UWorld* World = Cast<UWorld>(WorldContextObject);
+	AGloabalGameState* State = World->GetGameState<AGloabalGameState>();
+	return State;
+}
+
+void UGlobalBlueprintFunctionLibrary::PushActor(const UObject* WorldContextObject, uint8 _GroupIndex, AActor* _Actor)
+{
+	if (nullptr == WorldContextObject)
+	{
+		return;
+	}
+
+	const UWorld* World = Cast<UWorld>(WorldContextObject);
+
+	AGloabalGameState* State = World->GetGameState<AGloabalGameState>();
+	if (nullptr == State)
+	{
+		UE_LOG(MyLog, Error, TEXT("%S(%u)> if (nullptr == State)"), __FUNCTION__, __LINE__);
+		return;
+		// UE_LOG(GIMATLog, Fatal, TEXT("%S(%u)> if (nullptr == State)"), __FUNCTION__, __LINE__);
+	}
+
+	State->PushActor(_GroupIndex, _Actor);
+}
+
+void UGlobalBlueprintFunctionLibrary::PopActor(const UObject* WorldContextObject, uint8 _GroupIndex, AActor* _Actor)
+{
+	if (nullptr == WorldContextObject)
+	{
+		return;
+	}
+
+	const UWorld* World = Cast<UWorld>(WorldContextObject);
+
+	AGloabalGameState* State = World->GetGameState<AGloabalGameState>();
+	if (nullptr == State)
+	{
+		UE_LOG(MyLog, Error, TEXT("%S(%u)> if (nullptr == State)"), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	State->PopActor(_GroupIndex, _Actor);
+}
+
+

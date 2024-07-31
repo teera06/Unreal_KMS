@@ -8,6 +8,7 @@
 
 class AGlobalHUD;
 class UGlobalGameInstance;
+class AGloabalGameState;
 /**
  * 
  */
@@ -27,9 +28,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject"))
 	static UGlobalGameInstance* GetGlobalGameInstance(const UWorld* WorldContextObject);
 
-	/*static AGlobalGameState* GetGlobalGameState(const UObject* WorldContextObject);*/
+	static AGloabalGameState* GetGloabalGameState(const UObject* WorldContextObject);
 
-	/*template<typename EnumType>
+	template<typename EnumType>
 	static void PushActor(const UObject* WorldContextObject, EnumType _GroupIndex, AActor* _Actor)
 	{
 		if (nullptr == WorldContextObject)
@@ -58,6 +59,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Game", meta = (WorldContext = "WorldContextObject", UnsafeDuringActorConstruction = "true"))
 	static void PopActor(const UObject* WorldContextObject, uint8 _GroupIndex, AActor* _Actor);
 
-	UFUNCTION(BlueprintCallable, Category = "Game", meta = (WorldContext = "WorldContextObject", UnsafeDuringActorConstruction = "true"))
+	/*UFUNCTION(BlueprintCallable, Category = "Game", meta = (WorldContext = "WorldContextObject", UnsafeDuringActorConstruction = "true"))
 	static bool PushGameItemToEmpty(const UObject* WorldContextObject, class ATPSGameItem* _Actor);*/
 };
