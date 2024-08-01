@@ -60,7 +60,7 @@ void UBTTaskNode_Idle::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 
 	AActor* TargetActor = CheckTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
 
-	/*if (nullptr == TargetActor)
+	if (nullptr == TargetActor)
 	{
 		MonsterData->IdleTime += _DeltaSeconds;
 
@@ -69,7 +69,7 @@ void UBTTaskNode_Idle::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 			ChangeState(_OwnerComp, EMonsterState::Patrol);
 		}
 		return;
-	}*/
+	}
 
 	ChangeState(_OwnerComp, EMonsterState::PlayerToMove);
 	return;
