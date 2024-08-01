@@ -32,7 +32,7 @@ EBTNodeResult::Type UBTTaskNode_Att1::ExecuteTask(UBehaviorTreeComponent& _Owner
 	// 회전하고 애니메이션 체인지
 	//RotationToTargetActor(_OwnerComp);
 
-	Character->ChangeAnimation(EMonsterAnimation::Attack0);
+	Character->ChangeAnimation(EMonsterAnimation::Attack);
 
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 
@@ -69,7 +69,7 @@ void UBTTaskNode_Att1::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 		FVector Dir = TargetActor->GetActorLocation() - Character->GetActorLocation();
 		if (Dir.Size() < MonsterData->Data->AttackRange)
 		{
-			ChangeState(_OwnerComp, EMonsterState::Attack);
+			ChangeState(_OwnerComp, EMonsterState::Attack2);
 			return;
 		}
 	}

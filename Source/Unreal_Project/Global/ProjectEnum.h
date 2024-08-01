@@ -65,6 +65,7 @@ enum class EMonsterState : uint8
 	PlayerToMove UMETA(DisplayName = "플레이어 쫓기"),
 	MoveToLocation UMETA(DisplayName = "정해진 위치로 이동하기"),
 	Attack UMETA(DisplayName = "공격"),
+	Attack2 UMETA(DisplayName = "공격2"),
 };
 
 UENUM(BlueprintType)
@@ -72,9 +73,9 @@ enum class EMonsterAnimation : uint8
 {
 	Idle UMETA(DisplayName = "서있기"),
 	Run UMETA(DisplayName = "달리기"),
-	Attack0 UMETA(DisplayName = "평타0"),
-	Attack1 UMETA(DisplayName = "평타1"),
-	Attack2 UMETA(DisplayName = "평타2"),
+	Attack UMETA(DisplayName = "평타0"),
+	Attack2 UMETA(DisplayName = "평타1"),
+	Attack3 UMETA(DisplayName = "평타2"),
 };
 
 UENUM(BlueprintType)
