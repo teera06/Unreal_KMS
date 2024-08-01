@@ -13,10 +13,70 @@
 
 EBTNodeResult::Type UBTTaskNode_SkillAtt::ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* NodeMemory)
 {
-	return EBTNodeResult::Type();
+	Super::ExecuteTask(_OwnerComp, NodeMemory);
+
+	EMonsterState State = GetCurState<EMonsterState>(_OwnerComp);
+
+	if (State != EMonsterState::SkillAttack1)
+	{
+		return EBTNodeResult::Type::Failed;
+	}
+
+	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
+	if (false == Character->IsValidLowLevel())
+	{
+		UE_LOG(MyLog, Fatal, TEXT("%S(%u)> if (ItemMeshs.Num() <= static_cast<uint8>(_Slot))"), __FUNCTION__, __LINE__);
+		return EBTNodeResult::Aborted;
+	}
+
+	// 회전하고 애니메이션 체인지
+	RotationToTargetActor(_OwnerComp);
+
+	Character->ChangeAnimation(EMonsterAnimation::Skill1Att);
+
+	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
+
+	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+
+	if (nullptr != Anim)
+	{
+		MonsterData->AttackTime = Anim->GetPlayLength();
+	}
+
+	UGlobalGameInstance* Init = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
+	Init->SetIsMonsterSkillAtt1(false);
+
+	return EBTNodeResult::Type::InProgress;
 }
 
 void UBTTaskNode_SkillAtt::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNodeMemory, float _DeltaSeconds)
 {
+	Super::TickTask(_OwnerComp, _pNodeMemory, _DeltaSeconds);
 
+	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
+	MonsterData->AttackTime -= _DeltaSeconds;
+
+	if (0.0f < (MonsterData->AttackTime - MinusTime))
+	{
+		return;
+	}
+
+	AActor* TargetActor = CheckTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
+
+
+
+
+	if (nullptr != TargetActor)
+	{
+		FVector Dir = TargetActor->GetActorLocation() - Character->GetActorLocation();
+		if (Dir.Size() < MonsterData->Data->AttackRange)
+		{
+			ChangeState(_OwnerComp, EMonsterState::Attack);
+			return;
+		}
+	}
+
+
+	ChangeState(_OwnerComp, EMonsterState::Idle);
 }

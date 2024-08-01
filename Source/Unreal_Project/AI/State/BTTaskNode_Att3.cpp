@@ -4,7 +4,6 @@
 #include "AI/State/BTTaskNode_Att3.h"
 #include "Global/ProjectEnum.h"
 #include "Unreal_Project.h"
-#include "GlobalMainCharacter/GlobalCharacter.h"
 #include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
 #include "Global/GloabalGameState.h"
 #include "Global/GlobalBlueprintFunctionLibrary.h"
@@ -32,6 +31,8 @@ EBTNodeResult::Type UBTTaskNode_Att3::ExecuteTask(UBehaviorTreeComponent& _Owner
 	// 회전하고 애니메이션 체인지
 	RotationToTargetActor(_OwnerComp);
 
+	UGlobalGameInstance* Init = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
+	Init->SetIsMonsterSkillAtt1(true);
 	Character->ChangeAnimation(EMonsterAnimation::Attack3);
 
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));

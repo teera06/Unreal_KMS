@@ -9,6 +9,8 @@
 #include "AI/AIController/MainAIController.h"
 #include "NavigationSystem.h"
 #include "NavigationPath.h"
+#include "Global/GlobalBlueprintFunctionLibrary.h"
+#include "Global/GlobalGameInstance.h"
 
 EBTNodeResult::Type UBTTaskNode_PlayerToMove::ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* _NodeMemory)
 {
@@ -119,5 +121,15 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 		return;
 	}
 
-	ChangeState(_OwnerComp, EMonsterState::Attack);
+	UGlobalGameInstance* Init = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
+	Init->SetIsMonsterSkillAtt1(true);
+	if (true == Init->GetIsMonsterSkillAtt1())
+	{
+		ChangeState(_OwnerComp, EMonsterState::SkillAttack1);
+	}
+	else
+	{
+		ChangeState(_OwnerComp, EMonsterState::Attack);
+	}
+	
 }
