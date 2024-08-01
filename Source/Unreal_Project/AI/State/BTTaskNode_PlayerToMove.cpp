@@ -119,5 +119,5 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 		return;
 	}
 
-	//ChangeState(_OwnerComp, ETPSMonsterState::Attack);
+	ChangeState(_OwnerComp, EMonsterState::Attack);
 }
