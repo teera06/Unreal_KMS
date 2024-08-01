@@ -69,7 +69,7 @@ void UBTTaskNode_Att2::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 		FVector Dir = TargetActor->GetActorLocation() - Character->GetActorLocation();
 		if (Dir.Size() < MonsterData->Data->AttackRange)
 		{
-			ChangeState(_OwnerComp, EMonsterState::Attack);
+			ChangeState(_OwnerComp, EMonsterState::Attack3);
 			return;
 		}
 	}

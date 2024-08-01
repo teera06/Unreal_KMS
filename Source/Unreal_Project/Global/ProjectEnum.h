@@ -66,6 +66,7 @@ enum class EMonsterState : uint8
 	MoveToLocation UMETA(DisplayName = "정해진 위치로 이동하기"),
 	Attack UMETA(DisplayName = "공격"),
 	Attack2 UMETA(DisplayName = "공격2"),
+	Attack3 UMETA(DisplayName = "공격3"),
 };
 
 UENUM(BlueprintType)
