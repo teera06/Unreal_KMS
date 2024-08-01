@@ -75,5 +75,5 @@ void UBTTaskNode_Att1::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 	}
 
 
-	ChangeState(_OwnerComp, EMonsterState::Idle);
+	ChangeState(_OwnerComp, EMonsterState::Attack2);
 }

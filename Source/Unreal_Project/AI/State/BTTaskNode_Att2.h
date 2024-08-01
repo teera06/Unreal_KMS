@@ -13,6 +13,12 @@ UCLASS()
 class UNREAL_PROJECT_API UBTTaskNode_Att2 : public UGlobalBTTaskNode
 {
 	GENERATED_BODY()
+public:
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UAnimSequence* Anim;
+
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float MinusTime = 0.0f;
 protected:
 	// 이 노드가 처음 실행될때 들어옵니다.
 	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* NodeMemory);

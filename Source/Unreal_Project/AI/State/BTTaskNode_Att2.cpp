@@ -38,10 +38,10 @@ EBTNodeResult::Type UBTTaskNode_Att2::ExecuteTask(UBehaviorTreeComponent& _Owner
 
 	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
 
-	/*if (nullptr != Anim)
+	if (nullptr != Anim)
 	{
 		MonsterData->AttackTime = Anim->GetPlayLength();
-	}*/
+	}
 
 	return EBTNodeResult::Type::InProgress;
 }
@@ -54,10 +54,10 @@ void UBTTaskNode_Att2::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
 	MonsterData->AttackTime -= _DeltaSeconds;
 
-	/*if (0.0f < (MonsterData->AttackTime - MinusTime))
+	if (0.0f < (MonsterData->AttackTime - MinusTime))
 	{
 		return;
-	}*/
+	}
 
 	AActor* TargetActor = CheckTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
 
