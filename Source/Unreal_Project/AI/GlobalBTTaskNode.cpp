@@ -5,6 +5,7 @@
 #include "Global/GloabalGameState.h"
 #include "Global/GlobalBlueprintFunctionLibrary.h"
 #include "Global/ProjectEnum.h"
+#include "GlobalMainCharacter/GlobalCharacter.h"
 
 UGlobalBTTaskNode::UGlobalBTTaskNode()
 {
@@ -93,4 +94,14 @@ AActor* UGlobalBTTaskNode::CheckTarget(UBehaviorTreeComponent& _OwnerComp, float
 	_OwnerComp.GetBlackboardComponent()->SetValueAsObject(TEXT("TargetActor"), TargetActor);
 
 	return TargetActor;
+}
+
+void UGlobalBTTaskNode::RotationToTargetActor(UBehaviorTreeComponent& _OwnerComp)
+{
+	UObject* Target = _OwnerComp.GetBlackboardComponent()->GetValueAsObject(TEXT("TargetActor"));
+	AActor* TargetActor = Cast<AActor>(Target);
+	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
+
+	FVector Dir = TargetActor->GetActorLocation() - Character->GetActorLocation();
+	Character->SetActorRotation(Dir.Rotation());
 }

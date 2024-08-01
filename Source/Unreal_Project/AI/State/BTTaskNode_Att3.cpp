@@ -30,7 +30,7 @@ EBTNodeResult::Type UBTTaskNode_Att3::ExecuteTask(UBehaviorTreeComponent& _Owner
 	}
 
 	// 회전하고 애니메이션 체인지
-	//RotationToTargetActor(_OwnerComp);
+	RotationToTargetActor(_OwnerComp);
 
 	Character->ChangeAnimation(EMonsterAnimation::Attack3);
 
