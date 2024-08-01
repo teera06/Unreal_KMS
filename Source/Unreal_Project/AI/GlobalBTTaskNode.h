@@ -85,6 +85,5 @@ protected:
 
 	AActor* CheckTarget(UBehaviorTreeComponent& _OwnerComp, float _Range, uint8 Target, bool _ZIgnore = true);
 
-	UFUNCTION()
 	void RotationToTargetActor(UBehaviorTreeComponent& _OwnerComp);
 };

@@ -25,9 +25,24 @@ public:
 		return Dir.GetSafeNormal();
 	}
 
-public:
 	const struct FMainMonsterDataRow* GetMonsterData(FName _Name);
+
+	void SetIsMonsterSkillAtt1(const bool _IsMonsterSkillAtt1)
+	{
+		IsMonsterSkillAtt1 = _IsMonsterSkillAtt1;
+	}
+
+	bool GetIsMonsterSkillAtt1() const
+	{
+		return IsMonsterSkillAtt1;
+	}
+
+
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UDataTable* MonsterTable=nullptr;
+
+	UPROPERTY()
+	bool IsMonsterSkillAtt1 = false;
 };
