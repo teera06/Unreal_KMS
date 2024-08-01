@@ -6,10 +6,9 @@
 #include "Unreal_Project.h"
 #include "GlobalMainCharacter/GlobalCharacter.h"
 #include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
-#include "MainActor/MainPlayer.h"
-#include "NavigationSystem.h"
-//#include "NavigationPath.h
 #include "AI/AIController/MainAIController.h"
+#include "NavigationSystem.h"
+#include "NavigationPath.h"
 
 EBTNodeResult::Type UBTTaskNode_PlayerToMove::ExecuteTask(UBehaviorTreeComponent& _OwnerComp, uint8* _NodeMemory)
 {
@@ -52,24 +51,24 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 
-	/*if (false == Target->IsValidLowLevel())
+	if (false == Target->IsValidLowLevel())
 	{
 		ChangeState(_OwnerComp, EMonsterState::Idle);
 		return;
-	}*/
+	}
 
-	AMainPlayer* Character = GetActor<AMainPlayer>(_OwnerComp);
+	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
 
 
 	AActor* OldTarget = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 	AActor* TargetActor = GetTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
 
-	/*if (nullptr == TargetActor)
+	if (nullptr == TargetActor)
 	{
 		MonsterData->TargetPosToOriginPos();
 		ChangeState(_OwnerComp, EMonsterState::MoveToLocation);
 		return;
-	}*/
+	}
 
 	// 무조건 가까운놈 쫓는다로 결정했다.
 	// 참고로 기반이 다 되어있기 때문에 쉽게 짠다는걸 기억해라.
@@ -79,27 +78,20 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 		return;
 	}
 
-	//if (true == MonsterData->IsGround && true == MonsterData->PathPoints.IsEmpty())
-	//{
-	//	FVector Start = Character->GetActorLocation();
-	//	FVector End = TargetActor->GetActorLocation();
+	if (true == MonsterData->PathPoints.IsEmpty())
+	{
+		FVector Start = Character->GetActorLocation();
+		FVector End = TargetActor->GetActorLocation();
 
-	//	UNavigationPath* Path = UNavigationSystemV1::FindPathToLocationSynchronously(GetWorld(), Start, End, Character);
-	//	//MonsterData->PathPoints = Path->PathPoints;
-	//	MonsterData->PathPoints.RemoveAt(0);
-
+		UNavigationPath* Path = UNavigationSystemV1::FindPathToLocationSynchronously(GetWorld(), Start, End, Character);
+		MonsterData->PathPoints = Path->PathPoints;
+		MonsterData->PathPoints.RemoveAt(0);
+	}
 
 //#if WITH_EDITOR
 //		Path->EnableDebugDrawing(true);
 //#endif
 	//}
-
-	FVector Start = Character->GetActorLocation();
-	FVector End = TargetActor->GetActorLocation();
-
-	UNavigationPath* Path = UNavigationSystemV1::FindPathToLocationSynchronously(GetWorld(), Start, End, Character);
-	//MonsterData->PathPoints = Path->PathPoints;
-	MonsterData->PathPoints.RemoveAt(0);
 
 	AMainAIController* Con = GetController<AMainAIController>(_OwnerComp);
 
