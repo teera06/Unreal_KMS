@@ -21,7 +21,7 @@ AActor* UGlobalBTTaskNode::GetActor(UBehaviorTreeComponent& _OwnerComp)
 void UGlobalBTTaskNode::ChangeState(UBehaviorTreeComponent& _OwnerComp, uint8 _StateChange)
 {
 	_OwnerComp.GetBlackboardComponent()->SetValueAsEnum(TEXT("StateValue"), _StateChange);
-	FinishLatentTask(_OwnerComp, EBTNodeResult::Failed);
+	FinishLatentTask(_OwnerComp, EBTNodeResult::Failed); // 로직적으로 이 노드가 실패했다. Selector로 이동
 }
 
 uint8 UGlobalBTTaskNode::GetCurState(UBehaviorTreeComponent& _OwnerComp)
@@ -38,12 +38,15 @@ AController* UGlobalBTTaskNode::GetController(UBehaviorTreeComponent& _OwnerComp
 
 AActor* UGlobalBTTaskNode::GetTarget(UBehaviorTreeComponent& _OwnerComp, float _Range, uint8 _TargetGroup, bool _ZIgnore /*= true*/)
 {
+	// Game state
 	AGloabalGameState* GameState = UGlobalBlueprintFunctionLibrary::GetGloabalGameState(GetWorld());
+	
+	// 플레이어 그룹
 	TArray<AActor*> Targets = GameState->GetGroup(EObjectType::Player);
 
 	// 공격범위를 가져와야 한다.
 	AActor* TargetActor = nullptr;
-	AActor* OwnerActor = GetActor(_OwnerComp);
+	AActor* OwnerActor = GetActor(_OwnerComp); // 몬스터
 
 	// 가장 가까운 타겟을 찾아야 한다.
 	// float 양수 최대값

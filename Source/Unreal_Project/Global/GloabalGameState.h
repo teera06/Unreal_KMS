@@ -24,7 +24,7 @@ class UNREAL_PROJECT_API AGloabalGameState : public AGameStateBase
 	GENERATED_BODY()
 public:
 	
-	// 100
+	// Game State 는 클라든 서버든 다 가지고 있다. 동기화
 	template<typename EnumType>
 	void PushActor(EnumType _Index, AActor* _Actor)
 	{
@@ -56,4 +56,5 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TMap<int, UActorGroup*> AllActor;
+	// 플레이어 그룹, 몬스터 그룹 Actor 관리
 };
