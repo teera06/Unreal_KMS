@@ -8,6 +8,8 @@
 #include "Global/GlobalAnimInstance.h"
 #include "GlobalCharacter.generated.h"
 
+class UPaperSpriteComponent;
+
 UCLASS()
 class UNREAL_PROJECT_API AGlobalCharacter : public ACharacter
 {
@@ -64,4 +66,7 @@ private:
 
 	UPROPERTY(Category = "Contents",  VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	uint8 AniValue = 0;
+
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPaperSpriteComponent* MiniMapSprite = nullptr;
 };
