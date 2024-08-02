@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "UI/UIENum.h"
 #include "GlobalHUD.generated.h"
 
 /**
@@ -19,17 +20,17 @@ public:
 	void AddDebugString(FString _Text);
 #endif
 
-	/*UFUNCTION(BlueprintCallable)
-	void UIOff(EPlayUIType _Type);
+	UFUNCTION(BlueprintCallable)
+	void UIOff(EPlayUIType _Type); // UI 끄기
 
 	UFUNCTION(BlueprintCallable)
-	void UIOn(ETPSPlayUIType _Type);
+	void UIOn(EPlayUIType _Type); // UI 켜기
 
 	UFUNCTION(BlueprintCallable)
-	UUserWidget* GetUI(ETPSPlayUIType _Type);
+	UUserWidget* GetUI(EPlayUIType _Type); // UI 가져오기
 
 	UFUNCTION(BlueprintCallable)
-	void UIVisibilitySwitch(ETPSPlayUIType _Type);
+	void UIVisibilitySwitch(EPlayUIType _Type); // ??
 
 
 	UFUNCTION(BlueprintCallable)
@@ -38,11 +39,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UISetVisibilityKey(FKey _Key, ESlateVisibility _Value);
 
-	UFUNCTION(BlueprintCallable)
-	void UISetVisibility(ETPSPlayUIType _Type, ESlateVisibility _Value);
+	/*UFUNCTION(BlueprintCallable)
+	void UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value);*/
 
-	UFUNCTION(BlueprintImplementableEvent, meta = (CallInEditor = true))
-	void WidgetSizeAndPos(UUserWidget* _Widget, FAnchorData _Data);
+	/*UFUNCTION(BlueprintImplementableEvent, meta = (CallInEditor = true))
+	void WidgetSizeAndPos(UUserWidget* _Widget, FAnchorData _Data);*/
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetCurZOrder()
@@ -58,20 +59,20 @@ private:
 	TMap<EPlayUIType, UUserWidget*> Widgets;
 
 
-	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	TMap<EPlayUIType, FUICreateDataRow> WidgetDatas;
+	/*UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TMap<EPlayUIType, FUICreateDataRow> WidgetDatas;*/
 
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 
 	TMap<FKey, UUserWidget*> WidgetKeys;
 
-	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	TMap<FKey, FUICreateDataRow> WidgetKeyDatas;
+	/*UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TMap<FKey, FUICreateDataRow> WidgetKeyDatas;*/
 
 	TArray<UUserWidget*> OpenWidget;
 
 	int AllUIViewCount = 0;
 
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	int CurZOrder = 0;*/
+	int CurZOrder = 0;
 };
