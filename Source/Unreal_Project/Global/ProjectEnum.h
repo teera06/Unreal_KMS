@@ -74,6 +74,7 @@ UENUM(BlueprintType)
 enum class EMonsterAnimation : uint8
 {
 	Idle UMETA(DisplayName = "서있기"),
+	Walk UMETA(DisplayName = "걷기"),
 	Run UMETA(DisplayName = "달리기"),
 	Attack UMETA(DisplayName = "평타0"),
 	Attack2 UMETA(DisplayName = "평타1"),

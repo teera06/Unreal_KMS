@@ -56,7 +56,7 @@ EBTNodeResult::Type UBTTaskNode_Patrol::ExecuteTask(UBehaviorTreeComponent& _Own
 		return EBTNodeResult::Aborted;
 	}
 
-	Character->ChangeAnimation(EMonsterAnimation::Run);
+	Character->ChangeAnimation(EMonsterAnimation::Walk);
 
 
 	return EBTNodeResult::Type::InProgress;

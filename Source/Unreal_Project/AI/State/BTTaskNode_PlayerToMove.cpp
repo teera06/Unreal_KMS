@@ -53,6 +53,7 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 
+	// 추격 대상을 찾지못한경우
 	if (false == Target->IsValidLowLevel())
 	{
 		ChangeState(_OwnerComp, EMonsterState::Idle);
@@ -65,6 +66,7 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 	AActor* OldTarget = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 	AActor* TargetActor = GetTarget(_OwnerComp, MonsterData->Data->SightRange, EObjectType::Player);
 
+	// 추격 대상이 시양에서 벗어난 경우
 	if (nullptr == TargetActor)
 	{
 		MonsterData->TargetPosToOriginPos();
