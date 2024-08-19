@@ -125,13 +125,25 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 
 	UGlobalGameInstance* Init = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
 	//Init->SetIsMonsterSkillAtt1(true);
-	if (true == Init->GetIsMonsterSkillAtt1())
+	if (MonsterData->ComboAtt==3)
 	{
 		ChangeState(_OwnerComp, EMonsterState::SkillAttack1);
 	}
 	else
 	{
-		ChangeState(_OwnerComp, EMonsterState::Attack);
+		if (MonsterData->ComboAtt == 0)
+		{
+			ChangeState(_OwnerComp, EMonsterState::Attack);
+		}
+		else if (MonsterData->ComboAtt == 1)
+		{
+			ChangeState(_OwnerComp, EMonsterState::Attack2);
+		}
+		else if (MonsterData->ComboAtt == 2)
+		{
+			ChangeState(_OwnerComp, EMonsterState::Attack3);
+		}
+
 	}
 	
 }

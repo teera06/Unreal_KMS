@@ -33,10 +33,13 @@ EBTNodeResult::Type UBTTaskNode_Att1::ExecuteTask(UBehaviorTreeComponent& _Owner
 	RotationToTargetActor(_OwnerComp);
 
 	Character->ChangeAnimation(EMonsterAnimation::Attack);
+	
+	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+
+	++MonsterData->ComboAtt;
 
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 
-	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
 
 	if (nullptr != Anim)
 	{
@@ -69,7 +72,7 @@ void UBTTaskNode_Att1::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 		FVector Dir = TargetActor->GetActorLocation() - Character->GetActorLocation();
 		if (Dir.Size() < MonsterData->Data->AttackRange)
 		{
-			ChangeState(_OwnerComp, EMonsterState::Attack2);
+			ChangeState(_OwnerComp, EMonsterState::PlayerToMove);
 			return;
 		}
 	}

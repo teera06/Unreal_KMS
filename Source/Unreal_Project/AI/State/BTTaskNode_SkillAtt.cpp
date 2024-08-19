@@ -37,14 +37,12 @@ EBTNodeResult::Type UBTTaskNode_SkillAtt::ExecuteTask(UBehaviorTreeComponent& _O
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 
 	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
-
+	MonsterData->ComboAtt = 0;
 	if (nullptr != Anim)
 	{
 		MonsterData->AttackTime = Anim->GetPlayLength();
 	}
 
-	UGlobalGameInstance* Init = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
-	Init->SetIsMonsterSkillAtt1(false);
 
 	return EBTNodeResult::Type::InProgress;
 }

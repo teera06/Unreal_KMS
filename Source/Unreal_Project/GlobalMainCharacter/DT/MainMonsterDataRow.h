@@ -51,20 +51,24 @@ class UMainMonsterData : public UObject
 public:
 	const FMainMonsterDataRow* Data;
 
+	UPROPERTY()
 	TArray<FVector> PatrolPoints;
-
+	UPROPERTY()
 	TArray<FVector> PathPoints;
-
+	UPROPERTY()
 	float IdleTime = 0.0f;
-
+	UPROPERTY()
 	float AttackTime = 0.0f;
-
+	UPROPERTY()
+	int ComboAtt = 0;
+	UPROPERTY()
 	FVector OriginPos = FVector::ZeroVector;
-
+	UPROPERTY()
 	FVector TargetPos;
-
+	UPROPERTY()
 	bool IsGround = false;
 
+	UFUNCTION()
 	bool IsPatrol();
 
 	FORCEINLINE void TargetPosToOriginPos()

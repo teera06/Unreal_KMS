@@ -31,13 +31,12 @@ EBTNodeResult::Type UBTTaskNode_Att3::ExecuteTask(UBehaviorTreeComponent& _Owner
 	// 회전하고 애니메이션 체인지
 	RotationToTargetActor(_OwnerComp);
 
-	UGlobalGameInstance* Init = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
-	Init->SetIsMonsterSkillAtt1(true);
 	Character->ChangeAnimation(EMonsterAnimation::Attack3);
+	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
+	++MonsterData->ComboAtt;
 
 	AActor* Target = GetValueAsObject<AActor>(_OwnerComp, TEXT("TargetActor"));
 
-	UMainMonsterData* MonsterData = GetValueAsObject<UMainMonsterData>(_OwnerComp, TEXT("MonsterData"));
 
 	if (nullptr != Anim)
 	{
@@ -70,7 +69,7 @@ void UBTTaskNode_Att3::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _pNod
 		FVector Dir = TargetActor->GetActorLocation() - Character->GetActorLocation();
 		if (Dir.Size() < MonsterData->Data->AttackRange)
 		{
-			ChangeState(_OwnerComp, EMonsterState::Attack);
+			ChangeState(_OwnerComp, EMonsterState::PlayerToMove);
 			return;
 		}
 	}
