@@ -18,10 +18,10 @@ EBTNodeResult::Type UBTTaskNode_AttDelay::ExecuteTask(UBehaviorTreeComponent& _O
 
 	EMonsterState StateValue = GetCurState<EMonsterState>(_OwnerComp);
 
-	/*if (StateValue != EMonsterState::AttDelay)
+	if (StateValue != EMonsterState::AttDelay)
 	{
 		return EBTNodeResult::Type::Failed;
-	}*/
+	}
 
 	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
 
@@ -98,6 +98,16 @@ void UBTTaskNode_AttDelay::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _
 	{
 		return;
 	}
+
+	FVector TargetLocation = Target->GetActorLocation();
+
+	FVector MoveDir = TargetLocation - Character->GetActorLocation();
+
+	FVector DirNormalize = MoveDir.GetSafeNormal2D();
+
+	Character->AddMovementInput(DirNormalize*100.0f);
+
+
 
 	MinusTime -= _DeltaSeconds;
 
