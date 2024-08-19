@@ -68,6 +68,7 @@ enum class EMonsterState : uint8
 	Attack2 UMETA(DisplayName = "공격2"),
 	Attack3 UMETA(DisplayName = "공격3"),
 	SkillAttack1 UMETA(DisplayName = "스킬공격1"),
+	AttDelay UMETA(DisplayName = "공격 딜레이"),
 };
 
 UENUM(BlueprintType)
@@ -80,6 +81,7 @@ enum class EMonsterAnimation : uint8
 	Attack2 UMETA(DisplayName = "평타1"),
 	Attack3 UMETA(DisplayName = "평타2"),
 	Skill1Att UMETA(DisplayName = "스킬공격1"),
+	AttDelay UMETA(DisplayName = "공격 딜레이"),
 };
 
 UENUM(BlueprintType)
