@@ -18,11 +18,10 @@ EBTNodeResult::Type UBTTaskNode_AttDelay::ExecuteTask(UBehaviorTreeComponent& _O
 
 	EMonsterState StateValue = GetCurState<EMonsterState>(_OwnerComp);
 
-	if (StateValue != EMonsterState::PlayerToMove)
+	/*if (StateValue != EMonsterState::AttDelay)
 	{
 		return EBTNodeResult::Type::Failed;
-	}
-
+	}*/
 
 	AGlobalCharacter* Character = GetActor<AGlobalCharacter>(_OwnerComp);
 
@@ -100,32 +99,11 @@ void UBTTaskNode_AttDelay::TickTask(UBehaviorTreeComponent& _OwnerComp, uint8* _
 		return;
 	}
 
-	
-	FTimerHandle DelayAttTime;
+	MinusTime -= _DeltaSeconds;
 
-	//GetWorld()->GetTimerManager().SetTimer(DelayAttTime, FTimerDelegate::CreateLambda([=]()
-	//{
-	//	if (MonsterData->ComboAtt == 3)
-	//	{
-	//		ChangeState(_OwnerComp, EMonsterState::SkillAttack1);
-	//	}
-	//	else
-	//	{
-	//		if (MonsterData->ComboAtt == 0)
-	//		{
-	//			ChangeState(_OwnerComp, EMonsterState::Attack);
-	//		}
-	//		else if (MonsterData->ComboAtt == 1)
-	//		{
-	//			ChangeState(_OwnerComp, EMonsterState::Attack2);
-	//		}
-	//		else if (MonsterData->ComboAtt == 2)
-	//		{
-	//			ChangeState(_OwnerComp, EMonsterState::Attack3);
-	//		}
-
-	//	}
-	//}), 5.0f, false); 
-
-	
+	if (MinusTime <= 0.0f)
+	{
+		ChangeState(_OwnerComp, EMonsterState::PlayerToMove);
+		return;
+	}
 }

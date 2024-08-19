@@ -128,20 +128,24 @@ void UBTTaskNode_PlayerToMove::TickTask(UBehaviorTreeComponent& _OwnerComp, uint
 	if (MonsterData->ComboAtt==3)
 	{
 		ChangeState(_OwnerComp, EMonsterState::SkillAttack1);
+		return;
 	}
 	else
 	{
 		if (MonsterData->ComboAtt == 0)
 		{
 			ChangeState(_OwnerComp, EMonsterState::Attack);
+			return;
 		}
 		else if (MonsterData->ComboAtt == 1)
 		{
 			ChangeState(_OwnerComp, EMonsterState::Attack2);
+			return;
 		}
 		else if (MonsterData->ComboAtt == 2)
 		{
 			ChangeState(_OwnerComp, EMonsterState::Attack3);
+			return;
 		}
 
 	}
