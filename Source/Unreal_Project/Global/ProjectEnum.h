@@ -91,3 +91,6 @@ enum class EStaticItemSlot : uint8
 	LWeapon UMETA(DisplayName = "방패"),
 	SlotMax
 };
+
+
+
