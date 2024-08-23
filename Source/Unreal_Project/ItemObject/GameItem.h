@@ -10,26 +10,26 @@
 /**
  * 
  */
-USTRUCT(BlueprintType)
+UCLASS(Blueprintable, BlueprintType)
 
-struct UNREAL_PROJECT_API FGameItem : public FTableRowBase
+class UNREAL_PROJECT_API UGameItem : public UObject
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
-	int Value=0;
+	UPROPERTY(Category = "Item", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UUserWidget* SlotWidget;
+	// EItemType = Weapon;
+	UPROPERTY(Category = "Item", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	int Count = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
-	EItemType Type =EItemType::None;
+	/*UPROPERTY(Category = "Item", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	FItemDataRow ItemData;*/
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
-	int MaxCount = 99;
+	int Index = -1;
 
-	// 몬스터가 죽어서 드랍됐을대 뜰 매쉬
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
-	UStaticMesh* DropMesh=nullptr;
-
-	// 인벤토리에 들어왔을때 보일 아이콘
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
-	UTexture2D* Tex=nullptr;
+	/*void Copy(UGameItem* _Data)
+	{
+		Count = _Data->Count;
+		ItemData = _Data->ItemData;
+	}*/
 };

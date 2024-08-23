@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "InvenSlot.generated.h"
 
+class UGameItem;
 /**
  * 
  */
