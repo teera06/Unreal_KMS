@@ -2,10 +2,11 @@
 
 
 #include "UI/InvenSlot.h"
+#include "UI/InventoryWidget.h"
 
 void UInvenSlot::NativeConstruct()
 {
-
+	Super::NativeConstruct();
 }
 
 void UInvenSlot::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
