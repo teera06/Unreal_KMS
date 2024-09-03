@@ -12,7 +12,6 @@
 UENUM(BlueprintType)
 enum class EPlayUIType : uint8
 {
-	MiniMap,
 	Status,
 	Inventory,
 };
