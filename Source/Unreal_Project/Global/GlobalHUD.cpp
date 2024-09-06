@@ -19,7 +19,7 @@ void AGlobalHUD::AddDebugString(FString _Text)
 
 void AGlobalHUD::UIOff(EPlayUIType _Type)
 {
-	/*UISetVisibility(_Type, ESlateVisibility::Hidden);*/
+	UISetVisibility(_Type, ESlateVisibility::Hidden);
 }
 
 void AGlobalHUD::UIOn(EPlayUIType _Type)
@@ -121,6 +121,57 @@ void AGlobalHUD::UISetVisibilityKey(FKey _Key, ESlateVisibility _Value)
 	}
 
 	Widget->SetVisibility(_Value);
+}
+
+void AGlobalHUD::UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value)
+{
+	UUserWidget** WidgetPtr = Widgets.Find(_Type);
+	UUserWidget* Widget = *WidgetPtr;
+
+	//if (nullptr == Widget)
+	//{
+	//	UE_LOG(GIMATLog, Fatal, TEXT("%S(%u)> if (nullptr == Widget)"), __FUNCTION__, __LINE__);
+	//}
+
+	//if (_Value == ESlateVisibility::Visible)
+	//{
+	//	FUICreateDataRow* DataPtr = WidgetDatas.Find(_Type);
+
+	//	if (DataPtr->OpenMode == ETPSUIInputMode::UIOnly)
+	//	{
+	//		APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	//		FInputModeUIOnly UIOnly;
+	//		UIOnly.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	//		// UIOnly.SetWidgetToFocus(nullptr);
+	//		Controller->SetInputMode(UIOnly);
+	//		Controller->bShowMouseCursor = true;
+	//	}
+
+	//	OpenWidget.Add(Widget);
+	//	Widget->SetFocus();
+	//	++AllUIViewCount;
+	//}
+	//else if (_Value == ESlateVisibility::Hidden)
+	//{
+	//	--AllUIViewCount;
+	//	OpenWidget.Remove(Widget);
+
+	//	if (0 == AllUIViewCount)
+	//	{
+	//		APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	//		FInputModeGameOnly Option;
+	//		Option.SetConsumeCaptureMouseDown(true);
+	//		Controller->SetInputMode(Option);
+	//		Controller->bShowMouseCursor = false;
+	//	}
+	//	else
+	//	{
+	//		OpenWidget[OpenWidget.Num() - 1]->SetFocus();
+	//	}
+	//}
+
+	//Widget->SetVisibility(_Value);
 }
 
 void AGlobalHUD::BeginPlay()

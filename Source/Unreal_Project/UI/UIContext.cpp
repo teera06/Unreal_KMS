@@ -2,9 +2,9 @@
 
 
 #include "UI/UIContext.h"
-
-
-
+#include "Kismet/GameplayStatics.h"
+#include "Global/GlobalHUD.h"
+#include "Unreal_Project.h"
 // Sets default values for this component's properties
 UUIContext::UUIContext()
 {
@@ -22,7 +22,15 @@ void UUIContext::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+	APlayerController* Con = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	// UI가 입력과 관련이 많기 때문에 HUD를 찾아내려면 
+	PlayHUD = Cast<AGlobalHUD>(Con->GetHUD());
+
+	if (nullptr == PlayHUD)
+	{
+		UE_LOG(MyLog, Error, TEXT("%S(%u)> if (nullptr == TPSPlayHUD)"), __FUNCTION__, __LINE__);
+		return;
+	}
 }
 
 
@@ -36,8 +44,20 @@ void UUIContext::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 
 void UUIContext::UIVisibilitySwitch(EPlayUIType _Type)
 {
+	if (nullptr == PlayHUD)
+	{
+		return;
+	}
+
+	PlayHUD->UIOn(_Type);
 }
 
 void UUIContext::UIVisibilityOn(EPlayUIType _Type)
 {
+	if (nullptr == PlayHUD)
+	{
+		return;
+	}
+
+	PlayHUD->UIVisibilitySwitch(_Type);
 }

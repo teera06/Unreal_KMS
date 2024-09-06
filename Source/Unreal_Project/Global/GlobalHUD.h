@@ -39,8 +39,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UISetVisibilityKey(FKey _Key, ESlateVisibility _Value);
 
-	/*UFUNCTION(BlueprintCallable)
-	void UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value);*/
+	UFUNCTION(BlueprintCallable)
+	void UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value);
 
 	/*UFUNCTION(BlueprintImplementableEvent, meta = (CallInEditor = true))
 	void WidgetSizeAndPos(UUserWidget* _Widget, FAnchorData _Data);*/
