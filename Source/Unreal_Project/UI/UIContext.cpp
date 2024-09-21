@@ -49,7 +49,7 @@ void UUIContext::UIVisibilitySwitch(EPlayUIType _Type)
 		return;
 	}
 
-	PlayHUD->UIOn(_Type);
+	PlayHUD->UIVisibilitySwitch(_Type);
 }
 
 void UUIContext::UIVisibilityOn(EPlayUIType _Type)
@@ -58,6 +58,5 @@ void UUIContext::UIVisibilityOn(EPlayUIType _Type)
 	{
 		return;
 	}
-
-	PlayHUD->UIVisibilitySwitch(_Type);
+	PlayHUD->UIOn(_Type);
 }

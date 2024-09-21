@@ -57,4 +57,6 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TMap<int, UActorGroup*> AllActor;
 	// 플레이어 그룹, 몬스터 그룹 Actor 관리
+
+	
 };

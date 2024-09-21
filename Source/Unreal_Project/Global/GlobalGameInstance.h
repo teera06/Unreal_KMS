@@ -7,6 +7,8 @@
 #include "GlobalGameInstance.generated.h"
 
 struct FMainMonsterDataRow;
+class UUIGameSetting;
+class UGameItem;
 /**
  * 
  */
@@ -35,5 +37,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UDataTable* MonsterTable=nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UUIGameSetting* UIGameSettingData = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TArray<UGameItem*> InventoryItems;
 };
