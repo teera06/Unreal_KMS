@@ -174,6 +174,7 @@ void AGlobalHUD::UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value)
 	//Widget->SetVisibility(_Value);
 }
 
+
 void AGlobalHUD::BeginPlay()
 {
 	Super::BeginPlay();

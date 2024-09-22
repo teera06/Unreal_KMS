@@ -42,8 +42,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value);
 
-	/*UFUNCTION(BlueprintImplementableEvent, meta = (CallInEditor = true))
-	void WidgetSizeAndPos(UUserWidget* _Widget, FAnchorData _Data);*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (CallInEditor = true))
+	void WidgetSizeAndPos(UUserWidget* _Widget, FAnchorData _Data);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetCurZOrder()
