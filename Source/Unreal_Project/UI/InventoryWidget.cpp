@@ -26,12 +26,11 @@ void UInventoryWidget::TileViewInitialze(UTileView* _TileView, int _InitCount, T
 
 bool UInventoryWidget::PushGameItemToEmpty(UGameItem* _Item)
 {
-	//const FItemDataRow* ItemData = _Item->GetItemTable();
+	/*const FItemDataRow* ItemData = _Item->GetItemTable();
 
-	//UGameItem* NewItem = MakeItemDataToData(_Item->GetCount(), *ItemData);
+	UGameItem* NewItem = MakeItemDataToData(_Item->GetCount(), *ItemData);*/
 
-	//return PushItemToEmpty(NewItem);
-
+	/*return PushItemToEmpty(NewItem)*/
 	return false;
 }
 

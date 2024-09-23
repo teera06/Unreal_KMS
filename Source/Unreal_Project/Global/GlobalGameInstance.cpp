@@ -5,6 +5,28 @@
 #include "Unreal_Project.h"
 #include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
 
+void UGlobalGameInstance::Init()
+{
+	Super::Init();
+
+	if (nullptr == PlayUIDataTable)
+	{
+		UE_LOG(MyLog, Fatal, TEXT("%S(%u)> if (nullptr == MonsterDataTable)"), __FUNCTION__, __LINE__);
+	}
+
+	{
+		TArray<FUICreateDataRow*> Data;
+
+		TArray<FName> Names = PlayUIDataTable->GetRowNames();
+		PlayUIDataTable->GetAllRows(TEXT(""), Data);
+
+		for (size_t i = 0; i < Data.Num(); i++)
+		{
+			UIPlayWidgets.Add(Names[i].ToString(), *Data[i]);
+		}
+	}
+}
+
 const FMainMonsterDataRow* UGlobalGameInstance::GetMonsterData(FName _Name)
 {
 	if (nullptr == MonsterTable)

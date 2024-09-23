@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "UI/DT/UICreateDataRow.h"
 #include "GlobalGameInstance.generated.h"
 
 struct FMainMonsterDataRow;
@@ -17,6 +18,9 @@ class UNREAL_PROJECT_API UGlobalGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 public:
+
+	void Init() override;
+
 	FRandomStream Random;
 
 	FVector GetRandomDir2D()
@@ -29,6 +33,11 @@ public:
 
 	const struct FMainMonsterDataRow* GetMonsterData(FName _Name);
 
+	TMap<FString, FUICreateDataRow>& GetUIPlayerWigets()
+	{
+		return UIPlayWidgets;
+	}
+
 
 
 
@@ -38,8 +47,14 @@ private:
 	UDataTable* MonsterTable=nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UDataTable* PlayUIDataTable;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UUIGameSetting* UIGameSettingData = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TArray<UGameItem*> InventoryItems;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TMap<FString, FUICreateDataRow> UIPlayWidgets;
 };

@@ -5,11 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
 #include "UI/UIENum.h"
+
+#include "UI/DT/UICreateDataRow.h"
 #include "GlobalHUD.generated.h"
 
 /**
  * 
  */
+//struct FUICreateDataRow;
 UCLASS()
 class UNREAL_PROJECT_API AGlobalHUD : public AHUD
 {
@@ -59,15 +62,15 @@ private:
 	TMap<EPlayUIType, UUserWidget*> Widgets;
 
 
-	/*UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	TMap<EPlayUIType, FUICreateDataRow> WidgetDatas;*/
-
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 
 	TMap<FKey, UUserWidget*> WidgetKeys;
 
-	/*UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	TMap<FKey, FUICreateDataRow> WidgetKeyDatas;*/
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TMap<EPlayUIType, FUICreateDataRow> WidgetDatas;
+
+	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TMap<FKey, FUICreateDataRow> WidgetKeyDatas;
 
 	TArray<UUserWidget*> OpenWidget;
 

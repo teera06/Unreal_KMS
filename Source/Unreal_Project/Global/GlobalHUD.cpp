@@ -6,6 +6,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Unreal_Project.h"
 #include "Blueprint/WidgetTree.h"
+#include "Global/GlobalGameInstance.h"
+#include "UI/DT/UICreateDataRow.h"
 
 void AGlobalHUD::AddDebugString(FString _Text)
 {
@@ -24,7 +26,7 @@ void AGlobalHUD::UIOff(EPlayUIType _Type)
 
 void AGlobalHUD::UIOn(EPlayUIType _Type)
 {
-	/*UISetVisibility(_Type, ESlateVisibility::Visible);*/
+	UISetVisibility(_Type, ESlateVisibility::Visible);
 }
 
 UUserWidget* AGlobalHUD::GetUI(EPlayUIType _Type)
@@ -86,8 +88,8 @@ void AGlobalHUD::UISetVisibilityKey(FKey _Key, ESlateVisibility _Value)
 
 	if (_Value == ESlateVisibility::Visible)
 	{
-		/*FUICreateDataRow* DataPtr = WidgetKeyDatas.Find(_Key);
-		if (DataPtr->OpenMode == ETPSUIInputMode::UIOnly)
+		FUICreateDataRow* DataPtr = WidgetKeyDatas.Find(_Key);
+		if (DataPtr->OpenMode == EUIInputMode::UIOnly)
 		{
 			APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
@@ -98,7 +100,7 @@ void AGlobalHUD::UISetVisibilityKey(FKey _Key, ESlateVisibility _Value)
 		}
 
 		OpenWidget.Add(Widget);
-		Widget->SetFocus();*/
+		Widget->SetFocus();
 		++AllUIViewCount;
 	}
 	else if (_Value == ESlateVisibility::Hidden)
@@ -128,50 +130,50 @@ void AGlobalHUD::UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value)
 	UUserWidget** WidgetPtr = Widgets.Find(_Type);
 	UUserWidget* Widget = *WidgetPtr;
 
-	//if (nullptr == Widget)
-	//{
-	//	UE_LOG(GIMATLog, Fatal, TEXT("%S(%u)> if (nullptr == Widget)"), __FUNCTION__, __LINE__);
-	//}
+	if (nullptr == Widget)
+	{
+		UE_LOG(MyLog, Fatal, TEXT("%S(%u)> if (nullptr == Widget)"), __FUNCTION__, __LINE__);
+	}
 
-	//if (_Value == ESlateVisibility::Visible)
-	//{
-	//	FUICreateDataRow* DataPtr = WidgetDatas.Find(_Type);
+	if (_Value == ESlateVisibility::Visible)
+	{
+		FUICreateDataRow* DataPtr = WidgetDatas.Find(_Type);
+		
+		if (DataPtr->OpenMode == EUIInputMode::UIOnly)
+		{
+			APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+			
+			FInputModeUIOnly UIOnly;
+			UIOnly.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+			UIOnly.SetWidgetToFocus(nullptr);
+			Controller->SetInputMode(UIOnly);
+			Controller->bShowMouseCursor = true;
+		}
 
-	//	if (DataPtr->OpenMode == ETPSUIInputMode::UIOnly)
-	//	{
-	//		APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+		OpenWidget.Add(Widget);
+		Widget->SetFocus();
+		++AllUIViewCount;
+	}
+	else if (_Value == ESlateVisibility::Hidden)
+	{
+		--AllUIViewCount;
+		OpenWidget.Remove(Widget);
 
-	//		FInputModeUIOnly UIOnly;
-	//		UIOnly.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-	//		// UIOnly.SetWidgetToFocus(nullptr);
-	//		Controller->SetInputMode(UIOnly);
-	//		Controller->bShowMouseCursor = true;
-	//	}
+		if (0 == AllUIViewCount)
+		{
+			APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+			FInputModeGameOnly Option;
+			Option.SetConsumeCaptureMouseDown(true);
+			Controller->SetInputMode(Option);
+			Controller->bShowMouseCursor = false;
+		}
+		else
+		{
+			OpenWidget[OpenWidget.Num() - 1]->SetFocus();
+		}
+	}
 
-	//	OpenWidget.Add(Widget);
-	//	Widget->SetFocus();
-	//	++AllUIViewCount;
-	//}
-	//else if (_Value == ESlateVisibility::Hidden)
-	//{
-	//	--AllUIViewCount;
-	//	OpenWidget.Remove(Widget);
-
-	//	if (0 == AllUIViewCount)
-	//	{
-	//		APlayerController* Controller = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	//		FInputModeGameOnly Option;
-	//		Option.SetConsumeCaptureMouseDown(true);
-	//		Controller->SetInputMode(Option);
-	//		Controller->bShowMouseCursor = false;
-	//	}
-	//	else
-	//	{
-	//		OpenWidget[OpenWidget.Num() - 1]->SetFocus();
-	//	}
-	//}
-
-	//Widget->SetVisibility(_Value);
+	Widget->SetVisibility(_Value);
 }
 
 
@@ -180,50 +182,49 @@ void AGlobalHUD::BeginPlay()
 	Super::BeginPlay();
 
 
-	//UGIMATGameInstance* Inst = UGlobalBlueprintFunctionLibrary::GetGIMATGameInstance(GetWorld());
+	UGlobalGameInstance* Inst = UGlobalBlueprintFunctionLibrary::GetGlobalGameInstance(GetWorld());
 
-	//TMap<FString, FUICreateDataRow>& AllUI = Inst->GetTPSPlayWidgets();
+	TMap<FString, FUICreateDataRow>& AllUI = Inst->GetUIPlayerWigets();
 
-	//UEnum* Enum = StaticEnum<ETPSPlayUIType>();
+	UEnum* Enum = StaticEnum<EPlayUIType>();
+	
+	TSubclassOf<UUserWidget> MainWidgetClass = LoadClass<UUserWidget>(NULL, TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UI/Play/BP_MainPlayWidget.BP_MainPlayWidget_C'"));
 
-	//TSubclassOf<UUserWidget> MainWidgetClass = LoadClass<UUserWidget>(NULL, TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/BluePrint/TPS/Play/UI/BP_MainPlayWidget.BP_MainPlayWidget_C'"));
+	UUserWidget* MainWidget = CreateWidget<UUserWidget>(GetWorld(), MainWidgetClass);
+	MainWidget->AddToViewport();
 
-	//UUserWidget* MainWidget = CreateWidget<UUserWidget>(GetWorld(), MainWidgetClass);
-	//MainWidget->AddToViewport();
-
-	//UWidget* ParentWidget = MainWidget->GetWidgetFromName(TEXT("MainPenal"));
-	//UPanelWidget* PanelWidget = Cast<UPanelWidget>(ParentWidget);
+	UWidget* ParentWidget = MainWidget->GetWidgetFromName(TEXT("MainPenal"));
+	UPanelWidget* PanelWidget = Cast<UPanelWidget>(ParentWidget);
 
 	//// 애초에 빌드할때는 
-	//for (TPair<FString, FUICreateDataRow> Pair : AllUI)
-	//{
-	//	FUICreateDataRow& Data = Pair.Value;
-
-
-
-	//	UUserWidget* Widget = MainWidget->WidgetTree->ConstructWidget<UUserWidget>(Data.Object, *Pair.Key);
+	for (TPair<FString, FUICreateDataRow> Pair : AllUI)
+	{
+		FUICreateDataRow& Data = Pair.Value;
+		
+		UUserWidget* Widget = MainWidget->WidgetTree->ConstructWidget<UUserWidget>(Data.Object, *Pair.Key);
 	//	// 자식이니까 해줄필요가 없다.
 	//	// 부모가 한번 이미 했다.
-	//	// Widget->AddToViewport();
+	// 
+	    //Widget->AddToViewport();
+		
+		EPlayUIType Type = static_cast<EPlayUIType>(Enum->GetValueByName(*Pair.Key));
+		
+		Widgets.Add(Type, Widget);
+		WidgetDatas.Add(Type, Data);
+		
+		if (Data.Key != FKey())
+		{
+			WidgetKeyDatas.Add(Data.Key, Data);
+			WidgetKeys.Add(Data.Key, Widget);
+		}
+		
+		PanelWidget->AddChild(Widget);
+		WidgetSizeAndPos(Widget, Data.InitScaleToPos);
 
-	//	ETPSPlayUIType Type = static_cast<ETPSPlayUIType>(Enum->GetValueByName(*Pair.Key));
-
-	//	Widgets.Add(Type, Widget);
-	//	WidgetDatas.Add(Type, Data);
-
-	//	if (Data.Key != FKey())
-	//	{
-	//		WidgetKeyDatas.Add(Data.Key, Data);
-	//		WidgetKeys.Add(Data.Key, Widget);
-	//	}
-
-	//	PanelWidget->AddChild(Widget);
-	//	WidgetSizeAndPos(Widget, Data.InitScaleToPos);
-
-	//	if (false == Data.StartOn)
-	//	{
-	//		Widget->SetVisibility(ESlateVisibility::Hidden);
-	//	}
-	//}
+		if (false == Data.StartOn)
+		{
+			Widget->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
 }
 
