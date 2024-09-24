@@ -145,7 +145,7 @@ void AGlobalHUD::UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value)
 			
 			FInputModeUIOnly UIOnly;
 			UIOnly.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-			UIOnly.SetWidgetToFocus(nullptr);
+			//UIOnly.SetWidgetToFocus(nullptr);
 			Controller->SetInputMode(UIOnly);
 			Controller->bShowMouseCursor = true;
 		}
