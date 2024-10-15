@@ -4,6 +4,8 @@
 #include "Global/GlobalGameInstance.h"
 #include "Unreal_Project.h"
 #include "GlobalMainCharacter/DT/MainMonsterDataRow.h"
+#include "UI/DA/UIGameSetting.h"
+#include "ItemObject/GameItem.h"
 
 void UGlobalGameInstance::Init()
 {
@@ -23,6 +25,15 @@ void UGlobalGameInstance::Init()
 		for (size_t i = 0; i < Data.Num(); i++)
 		{
 			UIPlayWidgets.Add(Names[i].ToString(), *Data[i]);
+		}
+	}
+
+	{
+		for (size_t i = 0; i <UIGameSettingData->InvenCount; i++)
+		{
+			// 누구랑 메모리 생존을 함께 할거냐?
+			UGameItem* Item = NewObject<UGameItem>(this);
+			InventoryItems.Add(Item);
 		}
 	}
 }

@@ -4,7 +4,6 @@
 #include "UI/InventoryWidget.h"
 #include "UI/InvenSlot.h"
 #include "ItemObject/GameItem.h"
-
 void UInventoryWidget::TileViewInitialze(UTileView* _TileView, int _InitCount, TArray<UGameItem*> _ItemDatas)
 {
 	_TileView->ClearListItems();
@@ -30,7 +29,6 @@ bool UInventoryWidget::PushGameItemToEmpty(UGameItem* _Item)
 
 	UGameItem* NewItem = MakeItemDataToData(_Item->GetCount(), *ItemData);*/
 
-	/*return PushItemToEmpty(NewItem)*/
 	return false;
 }
 
