@@ -26,7 +26,7 @@ void AGlobalHUD::UIOff(EPlayUIType _Type)
 
 void AGlobalHUD::UIOn(EPlayUIType _Type)
 {
-	UISetVisibility(_Type, ESlateVisibility::Visible);
+	UISetVisibility(_Type, ESlateVisibility::Visible); // 인번토리 처음 킬때 여기로 넘어옴
 }
 
 UUserWidget* AGlobalHUD::GetUI(EPlayUIType _Type)
@@ -52,6 +52,7 @@ void AGlobalHUD::UIVisibilitySwitch(EPlayUIType _Type)
 
 void AGlobalHUD::UIVisibilitySwitchKey(FKey _Key)
 {
+	// UI 닫을 때
 	if (true == WidgetKeys.IsEmpty())
 	{
 		return;
@@ -63,7 +64,7 @@ void AGlobalHUD::UIVisibilitySwitchKey(FKey _Key)
 	}
 
 
-	UUserWidget** WidgetPtr = WidgetKeys.Find(_Key);
+	UUserWidget** WidgetPtr = WidgetKeys.Find(_Key); // 등록 해둔 키로 위젯을 찾음
 	UUserWidget* Widget = *WidgetPtr;
 
 	if (ESlateVisibility::Visible == Widget->GetVisibility())
@@ -78,7 +79,7 @@ void AGlobalHUD::UIVisibilitySwitchKey(FKey _Key)
 
 void AGlobalHUD::UISetVisibilityKey(FKey _Key, ESlateVisibility _Value)
 {
-	UUserWidget** WidgetPtr = WidgetKeys.Find(_Key);
+	UUserWidget** WidgetPtr = WidgetKeys.Find(_Key); // UI 닫을 때는 여기로 넘어옴
 	UUserWidget* Widget = *WidgetPtr;
 
 	if (nullptr == Widget)
@@ -125,10 +126,11 @@ void AGlobalHUD::UISetVisibilityKey(FKey _Key, ESlateVisibility _Value)
 	Widget->SetVisibility(_Value);
 }
 
+// 여기가 인벤토리 키 눌렀을때 오는 함수
 void AGlobalHUD::UISetVisibility(EPlayUIType _Type, ESlateVisibility _Value)
 {
-	UUserWidget** WidgetPtr = Widgets.Find(_Type);
-	UUserWidget* Widget = *WidgetPtr;
+	UUserWidget** WidgetPtr = Widgets.Find(_Type); // UI 타입 (인벤토리냐, 장비창이냐) Map으로 구분
+	UUserWidget* Widget = *WidgetPtr; // 찾은 UI 위젯 값
 
 	if (nullptr == Widget)
 	{

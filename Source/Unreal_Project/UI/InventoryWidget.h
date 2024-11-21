@@ -45,7 +45,7 @@ public:
 
 	//// Test용 함수
 	//UFUNCTION(BlueprintPure)
-	//UGameItem* MakeItemDataToTest(int Count, UDataTable* _DataTable, FName _Key);
+	//UGameItem* MakeItemDataToTest(int Count, UDataTable* _DataTable, FName _Key);누구임ㄷ
 
 	UFUNCTION(BlueprintPure)
 	UGameItem* MakeItemDataToData(int Count, FItemDataRow _Item);

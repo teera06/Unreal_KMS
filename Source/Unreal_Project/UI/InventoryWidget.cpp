@@ -4,6 +4,8 @@
 #include "UI/InventoryWidget.h"
 #include "UI/InvenSlot.h"
 #include "ItemObject/GameItem.h"
+
+// BP_Inven 처음 켜졌을 때 Event Construct 에서 실행
 void UInventoryWidget::TileViewInitialze(UTileView* _TileView, int _InitCount, TArray<UGameItem*> _ItemDatas)
 {
 	_TileView->ClearListItems();
