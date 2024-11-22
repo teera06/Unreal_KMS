@@ -47,12 +47,12 @@ public:
 
 private:
 	UPROPERTY()
-	UImage* IconWidget = nullptr;
+	UImage* IconWidget = nullptr; // 슬롯에 보여줄 이미지
 
 	UPROPERTY()
-	UTextBlock* ItemCountWidget = nullptr;
+	UTextBlock* ItemCountWidget = nullptr; // 아이템 개수
 
-	UGameItem* Data = nullptr;
+	UGameItem* Data = nullptr; // 아이템 정보
 	
 
 };

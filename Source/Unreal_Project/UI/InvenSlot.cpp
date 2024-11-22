@@ -24,6 +24,15 @@ void UInvenSlot::SetItemData(UGameItem* _SlotData)
 
 void UInvenSlot::Init(UGameItem* _Data)
 {
+	if (nullptr != IconWidget)
+	{
+		return;
+	}
+
+	Data = _Data;
+
+	IconWidget = Cast<UImage>(GetWidgetFromName(TEXT("Icon")));
+	ItemCountWidget = Cast<UTextBlock>(GetWidgetFromName(TEXT("ItemCount")));
 }
 
 bool UInvenSlot::IsDrag()
@@ -37,5 +46,12 @@ void UInvenSlot::DropTest()
 
 void UInvenSlot::Drop(UInvenSlot* _OtherSlot)
 {
+	if (_OtherSlot == this)
+	{
+		return;
+	}
+
+	int a = 0;
+
 }
 

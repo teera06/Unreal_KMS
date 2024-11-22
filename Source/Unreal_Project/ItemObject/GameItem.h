@@ -13,6 +13,7 @@
  */
 UCLASS(Blueprintable, BlueprintType)
 
+// 게임 아이템
 class UNREAL_PROJECT_API UGameItem : public UObject
 {
 	GENERATED_BODY()
